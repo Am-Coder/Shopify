@@ -22,10 +22,10 @@ public class Product {
 	private String type;
 	
 	@Column(nullable=false)	
-	private float price;
+	private Float price;
 	
 	@Column(nullable=false)
-	private float rating;
+	private Float rating;
 	
 	
 	@Column(nullable=false,columnDefinition="varchar(35)")
@@ -68,22 +68,24 @@ public class Product {
 	}
 
 
-	public float getPrice() {
+
+
+	public Float getPrice() {
 		return price;
 	}
 
 
-	public void setPrice(float price) {
+	public void setPrice(Float price) {
 		this.price = price;
 	}
 
 
-	public float getRating() {
+	public Float getRating() {
 		return rating;
 	}
 
 
-	public void setRating(float rating) {
+	public void setRating(Float rating) {
 		this.rating = rating;
 	}
 

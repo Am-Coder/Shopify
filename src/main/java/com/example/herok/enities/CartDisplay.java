@@ -1,20 +1,20 @@
-package com.example.herok.nonentity;
+package com.example.herok.enities;
 
-import javax.persistence.Transient;
+import org.springframework.data.rest.core.config.Projection;
 
-import org.springframework.stereotype.Component;
-
-@Component
-//@Projection
+@Projection(types= {Cart.class,Product.class})
 public interface CartDisplay {
-	int getQuantity();
+	
+	
+//	@Value("#{target.getQuantity()}")
+	Integer getQuantity(); //Don't use int,float because it is not serializable to json
 	String getProductname();
-	String getPrice();
+	Float getPrice();
 	String getAvailability();
 	
-//	private int quantity;
+//	private Integer quantity;
 //
-//	public CartDisplay(int quantity, String productname, float price, String availability) {
+//	public CartDisplay(Integer quantity, String productname, float price, String availability) {
 //		super();
 //		this.quantity = quantity;
 //		this.productname = productname;
@@ -28,11 +28,13 @@ public interface CartDisplay {
 //
 //	private String availability;
 //
-//	public int getQuantity() {
+//
+//
+//	public Integer getQuantity() {
 //		return quantity;
 //	}
 //
-//	public void setQuantity(int quantity) {
+//	public void setQuantity(Integer quantity) {
 //		this.quantity = quantity;
 //	}
 //

@@ -13,11 +13,11 @@ public class User {
 	@Id
 	private String email;
 	
-	public int getPhoneno() {
+	public Integer getPhoneno() {
 		return phoneno;
 	}
 
-	public void setPhoneno(int phoneno) {
+	public void setPhoneno(Integer phoneno) {
 		this.phoneno = phoneno;
 	}
 	
@@ -36,7 +36,7 @@ public class User {
 	
 	
 	@Column(unique=true,nullable=false)
-	private int phoneno;
+	private Integer phoneno;
 	
 	
 	@ManyToMany()
