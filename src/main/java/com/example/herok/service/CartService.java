@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 //import org.springframework.transaction.annotation.Transactional;
 
-import com.example.herok.enities.CartDisplay;
+import com.example.herok.nonentity.CartDisplay;
 import com.example.herok.repositories.CartRepo;
 
 @Service

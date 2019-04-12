@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.example.herok.enities.CartDisplay;
 import com.example.herok.enities.Product;
+import com.example.herok.nonentity.CartDisplay;
 import com.example.herok.repositories.CartRepo;
 import com.example.herok.repositories.ImageRepo;
 import com.example.herok.repositories.ProductRepo;
