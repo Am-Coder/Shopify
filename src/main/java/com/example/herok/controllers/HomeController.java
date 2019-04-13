@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.example.herok.AjaxMsg.AjaxMessage;
 import com.example.herok.enities.Email;
 import com.example.herok.enities.ResetParam;
 import com.example.herok.mailer.ForgotAndVerify;
@@ -29,8 +28,6 @@ public class HomeController {
 	
 	private final Logger logs = LoggerFactory.getLogger(HomeController.class);
 	
-	@Autowired 
-	AjaxMessage msg;
 	
 	@Autowired
 	private Verify verify;

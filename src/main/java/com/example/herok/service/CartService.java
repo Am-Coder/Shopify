@@ -31,4 +31,8 @@ public class CartService {
 			cartRepo.delete(c);
 		}
 	}
+	
+	public void removeOneInCart(String pid,String email) {
+		cartRepo.deleteByProductId(pid,email);
+	}
 }

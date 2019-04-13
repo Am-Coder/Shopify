@@ -28,30 +28,33 @@ window.addEventListener("load",function cart(){
 				console.log(e);
 			},
 			
-		})
+		});
 		
-	})
+	});
 	
 	
-	removeBut.addEventListener("click",function removeItem(e){
-		console.log(e.target.parentNode.id);
-//		$.ajax({
-//			type:"Post",
-//			url:"/mainsite/removeItem",
-//			contentType:"application/json",
-//			cache:"false",
-//			data:document.getElementById,
-//			timeout:100000,
-//			success:function (){
-//				
-//			},
-//			error: function(e){
-//				console.log(e);
-//			}
-//			
-//		})
+	removeBut.addEventListener("click", function removeItem(e){
+		console.log(e.target.parentNode.id.ty);
+		$.ajax({
+			type:"POST",
+			url:"/mainsite/removeItem",
+			contentType:"application/json",
+			cache:"false",
+			data:JSON.stringify({pid:e.target.parentNode.id}),//Send pid of item to be removed
+			timeout:100000,
+			success:function (){
+				CartRefresh();
+			},
+			error: function(e){
+				console.log(e);
+			},
+			
+		});
 		
-	})
+	});
+	
+	
+	
 })
 
 

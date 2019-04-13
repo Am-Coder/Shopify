@@ -7,10 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.example.herok.AjaxMsg.AjaxPidMessage;
 import com.example.herok.enities.Product;
 import com.example.herok.nonentity.CartDisplay;
 import com.example.herok.repositories.CartRepo;
@@ -111,8 +113,15 @@ public class MainSiteController {
 	
 	@ResponseBody
 	@PostMapping("/clearCart")
-	public void EmptyCart() {
+	public void emptyCart() {
 		System.out.println("Hell Comes");
 		cartService.emptyCart("abc@abc.com");
+	}
+	
+	@ResponseBody
+	@PostMapping("/removeItem")
+	public void removeItem(@RequestBody AjaxPidMessage msg) {
+		System.out.println("Hell Comes Here" + "---"+msg.getPid());
+		cartService.removeOneInCart(msg.getPid(),"abc@abc.com");
 	}
 }
