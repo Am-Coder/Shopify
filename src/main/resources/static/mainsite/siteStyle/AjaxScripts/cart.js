@@ -3,6 +3,59 @@
  */
 
 window.addEventListener("load",function cart(){
+	CartRefresh();
+
+	var clearCartBut = document.getElementById("clearcart");
+	var removeBut = document.getElementById("removeitem");
+	
+	
+	clearCartBut.addEventListener("click", function clearAll(){
+		
+		$.ajax({
+			type:"POST",
+			cache:"false",
+			url:"/mainsite/clearCart",
+			timeout:100000,
+			success:function(){
+				var container = document.getElementsByClassName("cart_items_list")[0];
+				
+				while(container.childNodes[0]!=null)
+					container.removeChild(container.childNodes[0]);
+				
+				CartRefresh();
+			},
+			error: function(e){
+				console.log(e);
+			},
+			
+		})
+		
+	})
+	
+	
+	removeBut.addEventListener("click",function removeItem(e){
+		console.log(e.target.parentNode.id);
+//		$.ajax({
+//			type:"Post",
+//			url:"/mainsite/removeItem",
+//			contentType:"application/json",
+//			cache:"false",
+//			data:document.getElementById,
+//			timeout:100000,
+//			success:function (){
+//				
+//			},
+//			error: function(e){
+//				console.log(e);
+//			}
+//			
+//		})
+		
+	})
+})
+
+
+function CartRefresh(){
 	$.ajax({
 		type:"GET",
 		cache:"true",
@@ -17,7 +70,7 @@ window.addEventListener("load",function cart(){
 //                    var cart = cartList[0];
 //                    var cartListItem = document.createElement("li");
 //                    cartListItem.setAttribute("class","cart_item item_list d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-lg-end justify-content-start");
-//
+//					  cartListItem.setAttribute("id",cart.id);
 //                    
 //                  var item =    '<div class="product d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-start mr-auto">'+
 //                                '<div><div class="product_number">'+1+'</div></div>'+
@@ -38,7 +91,8 @@ window.addEventListener("load",function cart(){
 //                                    '</div>'+
 //                                '</div>'+
 //                                '<div class="product_total product_text"><span>Total: </span>'+$3.99+'</div>';
-//
+//								   <button type="button" class="btn btn-outline-danger" id="removeitem">Remove</button>
+
 //                    cartListItem.innerHTML = item;
 //                    cartContainer.appendChild(cart_list);
 //
@@ -51,6 +105,5 @@ window.addEventListener("load",function cart(){
         error: function(e){
             console.log(e);
         },
-	})
-	
-})
+	});
+}

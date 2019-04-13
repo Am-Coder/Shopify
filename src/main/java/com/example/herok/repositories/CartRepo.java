@@ -23,4 +23,7 @@ public interface CartRepo extends JpaRepository<Cart, Long> {
 	@Query("Select c from Cart c INNER JOIN Product p on p.pid=c.pid where c.userEmail.email = :userEmail")
 	public List<Cart> findInCart(@Param("userEmail") String userEmail);
 	
+	@Query("Select c from Cart c INNER JOIN Product p on p.pid=c.pid where c.userEmail.email = :userEmail")
+	public List<Cart> findCartByUserEmail(@Param("userEmail") String userEmail);
+	
 }

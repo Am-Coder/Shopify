@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -101,12 +102,17 @@ public class MainSiteController {
 	@ResponseBody
 	public List<CartDisplay> getCart(String email){
 		System.out.println("Hello");
-		System.out.println(cartService.fetchCart("abc@abc.com").get(0).getClass());
-		System.out.println(cartRepo.findInCart("abc@abc.com").get(0).getQuantity());
 		System.out.println("Hell");
 		
 		
 		return cartService.fetchCart("abc@abc.com");
 //		return cartRepo.findInCart("abc@abc.com");
+	}
+	
+	@ResponseBody
+	@PostMapping("/clearCart")
+	public void EmptyCart() {
+		System.out.println("Hell Comes");
+		cartService.emptyCart("abc@abc.com");
 	}
 }
