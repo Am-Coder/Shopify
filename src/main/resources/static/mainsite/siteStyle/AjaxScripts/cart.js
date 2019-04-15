@@ -6,7 +6,7 @@ window.addEventListener("load",function cart(){
 	CartRefresh();
 
 	var clearCartBut = document.getElementById("clearcart");
-	var removeBut = document.getElementById("removeitem");
+	var removeBut = document.getElementsByClassName("removeitem");
 	
 	
 	clearCartBut.addEventListener("click", function clearAll(){
@@ -32,26 +32,36 @@ window.addEventListener("load",function cart(){
 		
 	});
 	
-	
-	removeBut.addEventListener("click", function removeItem(e){
-		console.log(e.target.parentNode.id.ty);
-		$.ajax({
-			type:"POST",
-			url:"/mainsite/removeItem",
-			contentType:"application/json",
-			cache:"false",
-			data:JSON.stringify({pid:e.target.parentNode.id}),//Send pid of item to be removed
-			timeout:100000,
-			success:function (){
-				CartRefresh();
-			},
-			error: function(e){
-				console.log(e);
-			},
+	for(i=0;i<removeBut.length;i++){
+		removeBut[i].addEventListener("click", function removeItem(e){
+			console.log(e.target.parentNode.id);
+			$.ajax({
+				type:"POST",
+				url:"/mainsite/removeItem",
+				contentType:"application/json",
+				cache:"false",
+				data:JSON.stringify({pid:e.target.parentNode.id}),//Send pid of item to be removed
+				timeout:100000,
+				success:function (){
+					var container = document.getElementsByClassName("cart_items_list")[0];
+					
+					while(container.childNodes[0]!=null)
+						container.removeChild(container.childNodes[0]);
+					
+					
+					CartRefresh();
+				},
+				error: function(e){
+					console.log(e);
+				},
+				
+			});
 			
 		});
 		
-	});
+		
+	}
+
 	
 	
 	
@@ -94,7 +104,7 @@ function CartRefresh(){
 //                                    '</div>'+
 //                                '</div>'+
 //                                '<div class="product_total product_text"><span>Total: </span>'+$3.99+'</div>';
-//								   <button type="button" class="btn btn-outline-danger" id="removeitem">Remove</button>
+//								   <button type="button" class="removeitem btn btn-outline-danger">Remove</button>
 
 //                    cartListItem.innerHTML = item;
 //                    cartContainer.appendChild(cart_list);
