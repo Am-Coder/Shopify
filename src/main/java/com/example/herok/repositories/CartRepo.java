@@ -22,7 +22,7 @@ public interface CartRepo extends JpaRepository<Cart, Long> {
 //	@Query("Select c.quantity,p.productname,p.price,p.availability from Cart c INNER JOIN Product p on p.pid=c.pid where c.userEmail.email = :userEmail")
 //	public List<CartDisplay> findByUserEmail(@Param("userEmail") String userEmail);
 	
-	@Query("Select new com.example.herok.nonentity.CartDisplay(c.quantity,p.productname,p.price,p.availability) from Cart c INNER JOIN Product p on p.pid=c.pid where c.userEmail.email = :userEmail")
+	@Query("Select new com.example.herok.nonentity.CartDisplay(p.pid,c.quantity,p.productname,i.directory,p.price,p.availability) from Cart c INNER JOIN Product p on p.pid=c.pid.pid INNER JOIN Images i on c.pid.pid=i.pid where c.userEmail.email = :userEmail")
 	public List<CartDisplay> findByUserEmail(@Param("userEmail") String userEmail);
 	
 	@Query("Select c from Cart c INNER JOIN Product p on p.pid=c.pid where c.userEmail.email = :userEmail")

@@ -77,7 +77,7 @@ public class AppConfig extends WebSecurityConfigurerAdapter{
 			.authorizeRequests()
 			.antMatchers("/SignIn","/SignUp","/forgot","/registerUser","/verify","/reset","/mainsite/**").permitAll()//public url
 			.antMatchers( "/RegistrationStyle/**").permitAll()		
-			.antMatchers("/siteStyle/**").permitAll()
+//			.antMatchers("siteStyle/**").permitAll()
 //			.antMatchers("/***").permitAll()
 			.antMatchers("/Home").hasAuthority("ROLE_USER")
 //			.anyRequest().authenticated()//protected url

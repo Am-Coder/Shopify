@@ -14,23 +14,51 @@ public class CartDisplay {
 //	Float getPrice();
 //	String getAvailability();
 //	
+	private String pid;
+	
 	private Integer quantity;
 	
 	private String productname;
 
+	private String src;
+	
 	private Float price;
 
 	private String availability;
 	
+	public String getSrc() {
+		return src;
+	}
+
+	public void setSrc(String src) {
+		this.src = src;
+	}
+
+
 	
 	
 	
-	public CartDisplay(Integer quantity, String productname, float price, String availability) {
+	
+
+
+
+
+	public CartDisplay(String pid, Integer quantity, String productname, String src, Float price, String availability) {
 		super();
+		this.pid = pid;
 		this.quantity = quantity;
 		this.productname = productname;
+		this.src = src;
 		this.price = price;
 		this.availability = availability;
+	}
+
+	public String getPid() {
+		return pid;
+	}
+
+	public void setPid(String pid) {
+		this.pid = pid;
 	}
 
 	public Integer getQuantity() {
