@@ -193,31 +193,32 @@
 								<div class="shipping">
 									<div class="cart_extra_title">Shipping Method</div>
 									<ul>
-										<li class="shipping_option d-flex flex-row align-items-center justify-content-start">
+										<li class="shipping_option d-flex flex-row align-items-center justify-content-start" onclick="CartTotal()">
 											<label class="radio_container">
-												<input type="radio" id="radio_1" name="shipping_radio" class="shipping_radio">
+												<input type="radio" id="radio_1" name="shipping_radio" class="shipping_radio" value="4.99">
 												<span class="radio_mark"></span>
 												<span class="radio_text">Next day delivery</span>
 											</label>
 											<div class="shipping_price ml-auto">$4.99</div>
 										</li>
-										<li class="shipping_option d-flex flex-row align-items-center justify-content-start">
+										<li class="shipping_option d-flex flex-row align-items-center justify-content-start" onclick="CartTotal()">
 											<label class="radio_container">
-												<input type="radio" id="radio_2" name="shipping_radio" class="shipping_radio">
+												<input type="radio" id="radio_2" name="shipping_radio" class="shipping_radio" value="1.99" checked>
 												<span class="radio_mark"></span>
 												<span class="radio_text">Standard delivery</span>
 											</label>
 											<div class="shipping_price ml-auto">$1.99</div>
 										</li>
-										<li class="shipping_option d-flex flex-row align-items-center justify-content-start">
+										<li class="shipping_option d-flex flex-row align-items-center justify-content-start" onclick="CartTotal()">
 											<label class="radio_container">
-												<input type="radio" id="radio_3" name="shipping_radio" class="shipping_radio" checked>
+												<input type="radio" id="radio_3" name="shipping_radio" class="shipping_radio" value="0" >
 												<span class="radio_mark"></span>
 												<span class="radio_text">Personal Pickup</span>
 											</label>
 											<div class="shipping_price ml-auto">Free</div>
 										</li>
 									</ul>
+
 								</div>
 							</div>
 						</div>
@@ -229,15 +230,15 @@
 								<ul class="cart_extra_total_list">
 									<li class="d-flex flex-row align-items-center justify-content-start">
 										<div class="cart_extra_total_title">Subtotal</div>
-										<div class="cart_extra_total_value ml-auto">$29.90</div>
+										<div class="cart_extra_total_value ml-auto" id="subtotal">$29.90</div>
 									</li>
 									<li class="d-flex flex-row align-items-center justify-content-start">
 										<div class="cart_extra_total_title">Shipping</div>
-										<div class="cart_extra_total_value ml-auto">Free</div>
+										<div class="cart_extra_total_value ml-auto" id="shipping">Free</div>
 									</li>
 									<li class="d-flex flex-row align-items-center justify-content-start">
 										<div class="cart_extra_total_title">Total</div>
-										<div class="cart_extra_total_value ml-auto">$29.90</div>
+										<div class="cart_extra_total_value ml-auto" id="total">$29.90</div>
 									</li>
 								</ul>
 								<div class="checkout_button trans_200"><a href="checkout.html">proceed to checkout</a></div>

@@ -60,12 +60,10 @@ function CartRefresh(){
                                     '<div class="product_text">'+cart.availability+'</div>'+
                                 '</div>'+
                                 '</div>'+
-//                                '<div class="product_color product_text"><span>Color: </span>'+'beige'+'</div>'+
-//                                '<div class="product_size product_text"><span>Size: </span>'+'L'+'</div>'+
                                 '<div class="product_price product_text"><span>'+'Price:' +'</span>'+cart.price+'</div>'+
                                 '<div class="product_quantity_container">'+
                                     '<div class="product_quantity ml-lg-auto mr-lg-auto text-center">'+
-                                        '<span class="product_text product_num">1</span>'+
+                                        '<span class="product_text product_num">'+ cart.quantity+'</span>'+
                                         '<div class="qty_sub qty_button trans_200 text-center"><span>-</span></div>'+
                                         '<div class="qty_add qty_button trans_200 text-center"><span>+</span></div>'+
                                     '</div>'+
@@ -86,7 +84,7 @@ function CartRefresh(){
             console.log(e);
         },
         complete: function(){
-        	
+        	CartTotal();
         	var removeBut = document.getElementsByClassName("removeitem");
         	
         	for(i=0;i<removeBut.length;i++){
@@ -122,3 +120,36 @@ function CartRefresh(){
         },
 	});
 }
+
+
+
+
+function CartTotal(){	
+						
+	var cartlist = document.getElementsByClassName("product_total");
+	var subtotal = 0 ;	
+	for(i=0; i<cartlist.length; i++){
+		subtotal = (subtotal + parseFloat(cartlist[i].innerText));
+	};
+	console.log(subtotal);	
+	var shipOptions = document.getElementsByClassName("shipping_radio");
+	var shipping = 0;
+	for(i=0; i<shipOptions.length; i++){
+		if(shipOptions[i].checked){
+			shipping = parseFloat(shipOptions[i].value);
+		}
+	}
+
+	console.log(shipping);
+	
+	var total = shipping + subtotal;
+	console.log(total);
+	
+	document.getElementById("subtotal").innerHTML = subtotal.toFixed(2);
+	document.getElementById("shipping").innerHTML = shipping.toFixed(2);
+	document.getElementById("total").innerHTML = total.toFixed(2);
+	
+	
+	
+}	
+	
