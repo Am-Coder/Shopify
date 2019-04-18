@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.herok.AjaxMsg.AjaxPidMessage;
+import com.example.herok.AjaxMsg.AjaxQuantityMessage;
 import com.example.herok.enities.Product;
 import com.example.herok.nonentity.CartDisplay;
 import com.example.herok.repositories.CartRepo;
@@ -43,29 +44,8 @@ public class MainSiteController {
 		
 		return "mainsite/index";
 	}				
-					
-					
-//	@GetMapping("/fetch")
-//	@ResponseBody	
-//	public ResponseEntity<byte[]> fetch() throws JsonProcessingException {
-//		Optional<Product> getting = prodRepo.findByBrand("Nike");
-//		if(getting.isPresent()) {
-//			Optional<Images>getimg=imageRepo.findByPid(getting.get());
-//		    InputStream in = servletContext.getResourceAsStream("/WEB-INF/images/image-example.jpg");
-//
-//			if(getimg.isPresent()) {
-//				String directory = getimg.get().getDirectory();
-//				
-//				byte[] bytes=IOUtils.toByteArray(in);
-//				return ResponseEntity
-//						.ok()
-//						.contentType(MediaType.IMAGE_JPEG)
-//						.body(bytes);
-//			}
-//			return null;
-//		}			
-//		return null;
-//	}				
+
+	
 					
 	@GetMapping("/fetchimage")
 	@ResponseBody	
@@ -103,8 +83,8 @@ public class MainSiteController {
 	@GetMapping("/fetchCart")
 	@ResponseBody
 	public List<CartDisplay> getCart(String email){
-		System.out.println("Hello");
-		System.out.println("Hell");
+//		System.out.println("Hello");
+//		System.out.println("Hell");
 		
 		
 		return cartService.fetchCart("abc@abc.com");
@@ -123,5 +103,13 @@ public class MainSiteController {
 	public void removeItem(@RequestBody AjaxPidMessage msg) {
 		System.out.println("Hell Comes Here" + "---"+msg.getPid());
 		cartService.removeOneInCart(msg.getPid(),"abc@abc.com");
+	}
+	
+	@ResponseBody
+	@PostMapping("/quantityUpdate")
+	public void quantityUpdate(@RequestBody AjaxQuantityMessage msg) {
+		System.out.println(msg.getPid()+"----"+msg.getQuantity());
+		cartService.updateQuantity(msg,"abc@abc.com");
+		
 	}
 }

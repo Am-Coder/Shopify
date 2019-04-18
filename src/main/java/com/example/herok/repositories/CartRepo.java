@@ -37,5 +37,10 @@ public interface CartRepo extends JpaRepository<Cart, Long> {
 	@Query("Delete from Cart c where c.pid.pid = :pid and c.userEmail.email = :email")
 	public void deleteByProductId(@Param("pid") String pid,@Param("email") String email);
 	
+	@Transactional
+	@Modifying
+	@Query("Update Cart c set c.quantity= :quantity where c.userEmail.email = :email and c.pid.pid = :pid")
+	public void updateQuantity(@Param("pid") String pid, @Param("quantity") int quantity, @Param("email") String email);
+	
 //	public void deleteByUserEmailAndPid(User userEmail,Product pid);
 }

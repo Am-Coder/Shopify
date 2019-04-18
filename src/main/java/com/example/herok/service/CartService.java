@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 //import org.springframework.transaction.annotation.Transactional;
 
+import com.example.herok.AjaxMsg.AjaxPidMessage;
+import com.example.herok.AjaxMsg.AjaxQuantityMessage;
 import com.example.herok.enities.Cart;
 import com.example.herok.nonentity.CartDisplay;
 import com.example.herok.repositories.CartRepo;
@@ -34,5 +36,9 @@ public class CartService {
 	
 	public void removeOneInCart(String pid,String email) {
 		cartRepo.deleteByProductId(pid,email);
+	}
+	
+	public void updateQuantity(AjaxQuantityMessage msg,String email) {
+		cartRepo.updateQuantity(msg.getPid(),msg.getQuantity(),email);
 	}
 }
