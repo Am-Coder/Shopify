@@ -104,18 +104,14 @@
 //////////////////////////////////////////////////////////////////////////M2
 
 window.addEventListener('load',function mainpage_load(){
-    var product_container = document.getElementsByClassName("row products_row")[0];
-
-    var bootstrap_container = document.createElement("div");
-    bootstrap_container.setAttribute("class","col-xl-4 col-md-6");
 
 
-
+	//Ajax for fetching clothes
 	$.ajax({
 		type : "GET",
 		cache: false,
 		// contentType : "application/json",//type of data being send to server
-		url : "/mainsite/fetch",
+		url : "/mainsite/fetch/Clothing",
 		// data : JSON.stringify({email: $("#email").val()}),
 		
 		dataType : "json",//result expected from server
@@ -131,27 +127,7 @@ window.addEventListener('load',function mainpage_load(){
 					var bootstrap_container = document.createElement("div");
 					bootstrap_container.setAttribute("class","col-xl-4 col-md-6");
 					
-					var image ;
 					
-					$.ajax({
-						type:"GET",
-						cache: false,
-						
-						url:"/mainsite/image",
-						
-						datatype:"byte",
-						
-						timeout:100000,
-						success: function(img){
-							image = img;
-						}
-						
-					})
-						
-					
-						
-						
-						
 					var product ='<div class="product">'+
 						'<div class="product_image"><img src='+ "siteStyle/images/product_6.jpg" +' alt=""></div>' +
 						'<div class="product_content">' +
@@ -164,7 +140,135 @@ window.addEventListener('load',function mainpage_load(){
 								'</div>'+
 								'<div class="ml-auto text-right">' +
 									'<div class="rating_r rating_r_4 home_item_rating">'+'<i></i><i></i><i></i><i></i><i></i>'+product.rating+'</div>'+
-									'<div class="product_price text-right">'+'Rs '+parseInt(product.price)+'<span>'+(((parseFloat(product.price)%1).toFixed(2)).toString()).replace("0","")+'</span></div>'+
+									'<div class="product_price text-right">'+'$'+parseInt(product.price)+'<span>'+(((parseFloat(product.price)%1).toFixed(2)).toString()).replace("0","")+'</span></div>'+
+								'</div>'+
+							'</div>'+
+							'<div class="product_buttons">'+
+								'<div class="text-right d-flex flex-row align-items-start justify-content-start">'+
+									'<div class="product_button product_fav text-center d-flex flex-column align-items-center justify-content-center">'+
+										'<div><div><img src="siteStyle/images/heart_2.svg" class="svg" alt=""><div>+</div></div></div>'+
+									'</div>'+
+									'<div class="product_button product_cart text-center d-flex flex-column align-items-center justify-content-center">'+
+										'<div><div><img src="siteStyle/images/cart.svg" class="svg" alt=""><div>+</div></div></div>'+
+									'</div>'+
+								'</div>'+
+							'</div>'+
+						'</div>'+
+					'</div>'+
+				'</div>' ;
+				bootstrap_container.innerHTML=product;
+				product_container.appendChild(bootstrap_container);
+			}
+
+		},
+		error : function(e) {
+			console.log("ERROR: ", e);
+		},
+		complete : function(e) {
+			console.log("DONE");
+		}
+	});
+	
+	
+	//Ajax for fetching electronics
+	$.ajax({
+		type : "GET",
+		cache: false,
+		// contentType : "application/json",//type of data being send to server
+		url : "/mainsite/fetch/Electronics",
+		// data : JSON.stringify({email: $("#email").val()}),
+		
+		dataType : "json",//result expected from server
+						//with json return type we can return java objects
+						//With text we can return String from java conroller
+		timeout : 100000,
+		success : function(product) {
+			
+			console.log(product);
+			if(product != null){
+					var product_container = document.getElementsByClassName("row products_row")[0];
+		
+					var bootstrap_container = document.createElement("div");
+					bootstrap_container.setAttribute("class","col-xl-4 col-md-6");
+					
+					
+					var product ='<div class="product">'+
+						'<div class="product_image"><img src='+ "siteStyle/images/product_6.jpg" +' alt=""></div>' +
+						'<div class="product_content">' +
+							'<div class="product_info d-flex flex-row align-items-start justify-content-start">' +
+								'<div>' + 
+									'<div>' +
+										'<div class="product_name"><a href='+product.productname+'>'+product.productname+'</a></div>'+
+										'<div class="product_category">In <a href='+product.type+'>'+product.type+'</a></div>'+
+									'</div>' +
+								'</div>'+
+								'<div class="ml-auto text-right">' +
+									'<div class="rating_r rating_r_4 home_item_rating">'+'<i></i><i></i><i></i><i></i><i></i>'+product.rating+'</div>'+
+									'<div class="product_price text-right">'+'$'+parseInt(product.price)+'<span>'+(((parseFloat(product.price)%1).toFixed(2)).toString()).replace("0","")+'</span></div>'+
+								'</div>'+
+							'</div>'+
+							'<div class="product_buttons">'+
+								'<div class="text-right d-flex flex-row align-items-start justify-content-start">'+
+									'<div class="product_button product_fav text-center d-flex flex-column align-items-center justify-content-center">'+
+										'<div><div><img src="siteStyle/images/heart_2.svg" class="svg" alt=""><div>+</div></div></div>'+
+									'</div>'+
+									'<div class="product_button product_cart text-center d-flex flex-column align-items-center justify-content-center">'+
+										'<div><div><img src="siteStyle/images/cart.svg" class="svg" alt=""><div>+</div></div></div>'+
+									'</div>'+
+								'</div>'+
+							'</div>'+
+						'</div>'+
+					'</div>'+
+				'</div>' ;
+				bootstrap_container.innerHTML=product;
+				product_container.appendChild(bootstrap_container);
+			}
+
+		},
+		error : function(e) {
+			console.log("ERROR: ", e);
+		},
+		complete : function(e) {
+			console.log("DONE");
+		}
+	});
+	
+	
+	//Ajax for fetching footwear
+	$.ajax({
+		type : "GET",
+		cache: false,
+		// contentType : "application/json",//type of data being send to server
+		url : "/mainsite/fetch/Footwear",
+		// data : JSON.stringify({email: $("#email").val()}),
+		
+		dataType : "json",//result expected from server
+						//with json return type we can return java objects
+						//With text we can return String from java conroller
+		timeout : 100000,
+		success : function(product) {
+			
+			console.log(product);
+			if(product != null){
+					var product_container = document.getElementsByClassName("row products_row")[0];
+		
+					var bootstrap_container = document.createElement("div");
+					bootstrap_container.setAttribute("class","col-xl-4 col-md-6");
+					
+					
+					var product ='<div class="product">'+
+						'<div class="product_image"><img src='+ "siteStyle/images/product_6.jpg" +' alt=""></div>' +
+						'<div class="product_content">' +
+							'<div class="product_info d-flex flex-row align-items-start justify-content-start">' +
+								'<div>' + 
+									'<div>' +
+										'<div class="product_name"><a href='+product.productname+'>'+product.productname+'</a></div>'+
+										'<div class="product_category">In <a href='+product.type+'>'+product.type+'</a></div>'+
+									'</div>' +
+								'</div>'+
+								'<div class="ml-auto text-right">' +
+									'<div class="rating_r rating_r_4 home_item_rating">'+'<i></i><i></i><i></i><i></i><i></i>'+product.rating+'</div>'+
+									'<div class="product_price text-right">'+'$'+parseInt(product.price)+'<span>'+(((parseFloat(product.price)%1).toFixed(2)).toString()).replace("0","")+'</span></div>'+
 								'</div>'+
 							'</div>'+
 							'<div class="product_buttons">'+

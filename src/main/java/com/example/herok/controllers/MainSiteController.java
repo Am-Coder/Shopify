@@ -1,11 +1,11 @@
 package com.example.herok.controllers;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,8 +18,8 @@ import com.example.herok.enities.Product;
 import com.example.herok.nonentity.CartDisplay;
 import com.example.herok.repositories.CartRepo;
 import com.example.herok.repositories.ImageRepo;
-import com.example.herok.repositories.ProductRepo;
 import com.example.herok.service.CartService;
+import com.example.herok.service.ProductService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 
@@ -28,7 +28,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 public class MainSiteController {
 	
 	@Autowired
-	ProductRepo prodRepo;
+	ProductService prodService;
 	
 	@Autowired
 	ImageRepo imageRepo;
@@ -47,15 +47,19 @@ public class MainSiteController {
 
 	
 					
-	@GetMapping("/fetchimage")
+	@GetMapping("/fetch/{type}")
 	@ResponseBody	
-	public Product fetchimage() throws JsonProcessingException {
-//		ObjectMapper om = new ObjectMapper();
-		Optional<Product> getting = prodRepo.findByBrand("Nike");
-		if(getting.isPresent()) {
-			return getting.get();
-		}			
-//		String res=om.writeValueAsString(prodRepo.getOne("1"));
+	public List<Product> fetchProduct(@PathVariable("type") String type) throws JsonProcessingException {
+		if(type.equals("clothing")){
+			return prodService.fetchClothes();
+		}
+		else if (type.equals("footwear")) {
+			return prodService.fetchFootwear();
+		}
+		else if (type.equals("electronics")) {
+			return prodService.fetchElectronics();
+		}
+
 		return null;
 	}				
 					

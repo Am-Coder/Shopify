@@ -1,5 +1,6 @@
 package com.example.herok.repositories;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -15,6 +16,18 @@ public interface ProductRepo extends JpaRepository<Product,String> {
 	Optional<Product> findByBrand(String brand);
 	Optional<Product> findByProductname(String productname);
 	Optional<Product> findByPrice(String price);
+	List<Product> findByType(String type);
+	
+//	@Query("")
+//	Product findClothes();
+//	
+//	@Query("")
+//	Product findElectronics();
+//	
+//	@Query("")
+//	Product findFootwear();
+	
+	
 	
 	
 }

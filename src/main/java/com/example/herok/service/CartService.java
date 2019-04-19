@@ -39,6 +39,8 @@ public class CartService {
 	}
 	
 	public void updateQuantity(AjaxQuantityMessage msg,String email) {
-		cartRepo.updateQuantity(msg.getPid(),msg.getQuantity(),email);
+		if(msg.getQuantity()!=0)
+			cartRepo.updateQuantity(msg.getPid(),msg.getQuantity(),email);
+
 	}
 }
