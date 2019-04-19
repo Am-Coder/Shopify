@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.herok.AjaxMsg.AjaxPidMessage;
 import com.example.herok.AjaxMsg.AjaxQuantityMessage;
-import com.example.herok.enities.Product;
 import com.example.herok.nonentity.CartDisplay;
+import com.example.herok.nonentity.ProductDisplay;
 import com.example.herok.repositories.CartRepo;
 import com.example.herok.repositories.ImageRepo;
 import com.example.herok.service.CartService;
@@ -49,17 +49,20 @@ public class MainSiteController {
 					
 	@GetMapping("/fetch/{type}")
 	@ResponseBody	
-	public List<Product> fetchProduct(@PathVariable("type") String type) throws JsonProcessingException {
-		if(type.equals("clothing")){
-			return prodService.fetchClothes();
+	public List<ProductDisplay> fetchProduct(@PathVariable("type") String type) throws JsonProcessingException {
+		if(type.equals("Clothing")){
+			System.out.println("clthes--"+prodService.fetchClothes(0));
+			return prodService.fetchClothes(0);
 		}
-		else if (type.equals("footwear")) {
-			return prodService.fetchFootwear();
+		else if (type.equals("Footwear")) {
+			System.out.println("footew--"+prodService.fetchFootwear(0));
+			return prodService.fetchFootwear(0);
 		}
-		else if (type.equals("electronics")) {
-			return prodService.fetchElectronics();
+		else if (type.equals("Electronics")) {
+			System.out.println("electronics--"+prodService.fetchElectronics(0));
+			return prodService.fetchElectronics(0);
 		}
-
+		System.out.println("done" + type);
 		return null;
 	}				
 					

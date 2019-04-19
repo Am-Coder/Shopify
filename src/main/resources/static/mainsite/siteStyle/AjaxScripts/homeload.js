@@ -118,46 +118,53 @@ window.addEventListener('load',function mainpage_load(){
 						//with json return type we can return java objects
 						//With text we can return String from java conroller
 		timeout : 100000,
-		success : function(product) {
+		success : function(productList) {
 			
-			console.log(product);
-			if(product != null){
+			console.log(productList);
+			if(productList.length != 0){
+				
 					var product_container = document.getElementsByClassName("row products_row")[0];
 		
-					var bootstrap_container = document.createElement("div");
-					bootstrap_container.setAttribute("class","col-xl-4 col-md-6");
-					
-					
-					var product ='<div class="product">'+
-						'<div class="product_image"><img src='+ "siteStyle/images/product_6.jpg" +' alt=""></div>' +
-						'<div class="product_content">' +
-							'<div class="product_info d-flex flex-row align-items-start justify-content-start">' +
-								'<div>' + 
-									'<div>' +
-										'<div class="product_name"><a href='+product.productname+'>'+product.productname+'</a></div>'+
-										'<div class="product_category">In <a href='+product.type+'>'+product.type+'</a></div>'+
-									'</div>' +
-								'</div>'+
-								'<div class="ml-auto text-right">' +
-									'<div class="rating_r rating_r_4 home_item_rating">'+'<i></i><i></i><i></i><i></i><i></i>'+product.rating+'</div>'+
-									'<div class="product_price text-right">'+'$'+parseInt(product.price)+'<span>'+(((parseFloat(product.price)%1).toFixed(2)).toString()).replace("0","")+'</span></div>'+
-								'</div>'+
-							'</div>'+
-							'<div class="product_buttons">'+
-								'<div class="text-right d-flex flex-row align-items-start justify-content-start">'+
-									'<div class="product_button product_fav text-center d-flex flex-column align-items-center justify-content-center">'+
-										'<div><div><img src="siteStyle/images/heart_2.svg" class="svg" alt=""><div>+</div></div></div>'+
+					for(i=0;i<productList.length;i++){
+						var product = productList[i];
+
+						var bootstrap_container = document.createElement("div");
+						bootstrap_container.setAttribute("class","col-xl-4 col-md-6");
+						
+						
+						var product ='<div class="product">'+
+							'<div class="product_image"><img src='+ product.directory +' alt=""></div>' +
+							'<div class="product_content">' +
+								'<div class="product_info d-flex flex-row align-items-start justify-content-start">' +
+									'<div>' + 
+										'<div>' +
+											'<div class="product_name"><a href='+product.productname+'>'+product.productname+'</a></div>'+
+											'<div class="product_category">In <a href='+product.type+'>'+product.type+'</a></div>'+
+										'</div>' +
 									'</div>'+
-									'<div class="product_button product_cart text-center d-flex flex-column align-items-center justify-content-center">'+
-										'<div><div><img src="siteStyle/images/cart.svg" class="svg" alt=""><div>+</div></div></div>'+
+									'<div class="ml-auto text-right">' +
+										'<div class="rating_r rating_r_4 home_item_rating">'+'<i></i><i></i><i></i><i></i><i></i>'+product.rating+'</div>'+
+										'<div class="product_price text-right">'+'$'+parseInt(product.price)+'<span>'+(((parseFloat(product.price)%1).toFixed(2)).toString()).replace("0","")+'</span></div>'+
+									'</div>'+
+								'</div>'+
+								'<div class="product_buttons">'+
+									'<div class="text-right d-flex flex-row align-items-start justify-content-start">'+
+										'<div class="product_button product_fav text-center d-flex flex-column align-items-center justify-content-center">'+
+											'<div><div><img src="siteStyle/images/heart_2.svg" class="svg" alt=""><div>+</div></div></div>'+
+										'</div>'+
+										'<div class="product_button product_cart text-center d-flex flex-column align-items-center justify-content-center">'+
+											'<div><div><img src="siteStyle/images/cart.svg" class="svg" alt=""><div>+</div></div></div>'+
+										'</div>'+
 									'</div>'+
 								'</div>'+
 							'</div>'+
 						'</div>'+
-					'</div>'+
-				'</div>' ;
-				bootstrap_container.innerHTML=product;
-				product_container.appendChild(bootstrap_container);
+					'</div>' ;
+					bootstrap_container.innerHTML=product;
+					product_container.appendChild(bootstrap_container);
+						
+				}
+					
 			}
 
 		},
@@ -182,46 +189,54 @@ window.addEventListener('load',function mainpage_load(){
 						//with json return type we can return java objects
 						//With text we can return String from java conroller
 		timeout : 100000,
-		success : function(product) {
+		success : function(productList) {
 			
-			console.log(product);
-			if(product != null){
-					var product_container = document.getElementsByClassName("row products_row")[0];
-		
-					var bootstrap_container = document.createElement("div");
-					bootstrap_container.setAttribute("class","col-xl-4 col-md-6");
+			console.log(productList);
+			if(productList.length != 0){
+				var product_container = document.getElementsByClassName("row products_row")[1];
+
+				for(i=0; i<productList.length; i++){
 					
-					
-					var product ='<div class="product">'+
-						'<div class="product_image"><img src='+ "siteStyle/images/product_6.jpg" +' alt=""></div>' +
-						'<div class="product_content">' +
-							'<div class="product_info d-flex flex-row align-items-start justify-content-start">' +
-								'<div>' + 
-									'<div>' +
-										'<div class="product_name"><a href='+product.productname+'>'+product.productname+'</a></div>'+
-										'<div class="product_category">In <a href='+product.type+'>'+product.type+'</a></div>'+
-									'</div>' +
-								'</div>'+
-								'<div class="ml-auto text-right">' +
-									'<div class="rating_r rating_r_4 home_item_rating">'+'<i></i><i></i><i></i><i></i><i></i>'+product.rating+'</div>'+
-									'<div class="product_price text-right">'+'$'+parseInt(product.price)+'<span>'+(((parseFloat(product.price)%1).toFixed(2)).toString()).replace("0","")+'</span></div>'+
-								'</div>'+
-							'</div>'+
-							'<div class="product_buttons">'+
-								'<div class="text-right d-flex flex-row align-items-start justify-content-start">'+
-									'<div class="product_button product_fav text-center d-flex flex-column align-items-center justify-content-center">'+
-										'<div><div><img src="siteStyle/images/heart_2.svg" class="svg" alt=""><div>+</div></div></div>'+
+						var product = productList[i];
+						
+						var bootstrap_container = document.createElement("div");
+						bootstrap_container.setAttribute("class","col-xl-4 col-md-6");
+						
+						
+						var product ='<div class="product">'+
+							'<div class="product_image"><img src='+ product.directory +' alt=""></div>' +
+							'<div class="product_content">' +
+								'<div class="product_info d-flex flex-row align-items-start justify-content-start">' +
+									'<div>' + 
+										'<div>' +
+											'<div class="product_name"><a href='+product.productname+'>'+product.productname+'</a></div>'+
+											'<div class="product_category">In <a href='+product.type+'>'+product.type+'</a></div>'+
+										'</div>' +
 									'</div>'+
-									'<div class="product_button product_cart text-center d-flex flex-column align-items-center justify-content-center">'+
-										'<div><div><img src="siteStyle/images/cart.svg" class="svg" alt=""><div>+</div></div></div>'+
+									'<div class="ml-auto text-right">' +
+										'<div class="rating_r rating_r_4 home_item_rating">'+'<i></i><i></i><i></i><i></i><i></i>'+product.rating+'</div>'+
+										'<div class="product_price text-right">'+'$'+parseInt(product.price)+'<span>'+(((parseFloat(product.price)%1).toFixed(2)).toString()).replace("0","")+'</span></div>'+
+									'</div>'+
+								'</div>'+
+								'<div class="product_buttons">'+
+									'<div class="text-right d-flex flex-row align-items-start justify-content-start">'+
+										'<div class="product_button product_fav text-center d-flex flex-column align-items-center justify-content-center">'+
+											'<div><div><img src="siteStyle/images/heart_2.svg" class="svg" alt=""><div>+</div></div></div>'+
+										'</div>'+
+										'<div class="product_button product_cart text-center d-flex flex-column align-items-center justify-content-center">'+
+											'<div><div><img src="siteStyle/images/cart.svg" class="svg" alt=""><div>+</div></div></div>'+
+										'</div>'+
 									'</div>'+
 								'</div>'+
 							'</div>'+
 						'</div>'+
-					'</div>'+
-				'</div>' ;
-				bootstrap_container.innerHTML=product;
-				product_container.appendChild(bootstrap_container);
+					'</div>' ;
+					bootstrap_container.innerHTML=product;
+					product_container.appendChild(bootstrap_container);
+					
+					
+				}
+					
 			}
 
 		},
@@ -246,46 +261,51 @@ window.addEventListener('load',function mainpage_load(){
 						//with json return type we can return java objects
 						//With text we can return String from java conroller
 		timeout : 100000,
-		success : function(product) {
+		success : function(productList) {
 			
-			console.log(product);
-			if(product != null){
-					var product_container = document.getElementsByClassName("row products_row")[0];
-		
-					var bootstrap_container = document.createElement("div");
-					bootstrap_container.setAttribute("class","col-xl-4 col-md-6");
+			console.log(productList);
+			if(productList.length != 0){
+				var product_container = document.getElementsByClassName("row products_row")[2];
+
+				for(i=0; i<productList.length; i++){
+						var product = productList[i];
 					
-					
-					var product ='<div class="product">'+
-						'<div class="product_image"><img src='+ "siteStyle/images/product_6.jpg" +' alt=""></div>' +
-						'<div class="product_content">' +
-							'<div class="product_info d-flex flex-row align-items-start justify-content-start">' +
-								'<div>' + 
-									'<div>' +
-										'<div class="product_name"><a href='+product.productname+'>'+product.productname+'</a></div>'+
-										'<div class="product_category">In <a href='+product.type+'>'+product.type+'</a></div>'+
-									'</div>' +
-								'</div>'+
-								'<div class="ml-auto text-right">' +
-									'<div class="rating_r rating_r_4 home_item_rating">'+'<i></i><i></i><i></i><i></i><i></i>'+product.rating+'</div>'+
-									'<div class="product_price text-right">'+'$'+parseInt(product.price)+'<span>'+(((parseFloat(product.price)%1).toFixed(2)).toString()).replace("0","")+'</span></div>'+
-								'</div>'+
-							'</div>'+
-							'<div class="product_buttons">'+
-								'<div class="text-right d-flex flex-row align-items-start justify-content-start">'+
-									'<div class="product_button product_fav text-center d-flex flex-column align-items-center justify-content-center">'+
-										'<div><div><img src="siteStyle/images/heart_2.svg" class="svg" alt=""><div>+</div></div></div>'+
+			
+						var bootstrap_container = document.createElement("div");
+						bootstrap_container.setAttribute("class","col-xl-4 col-md-6");
+						
+						
+						var product ='<div class="product">'+
+							'<div class="product_image"><img src='+ product.directory +' alt=""></div>' +
+							'<div class="product_content">' +
+								'<div class="product_info d-flex flex-row align-items-start justify-content-start">' +
+									'<div>' + 
+										'<div>' +
+											'<div class="product_name"><a href='+product.productname+'>'+product.productname+'</a></div>'+
+											'<div class="product_category">In <a href='+product.type+'>'+product.type+'</a></div>'+
+										'</div>' +
 									'</div>'+
-									'<div class="product_button product_cart text-center d-flex flex-column align-items-center justify-content-center">'+
-										'<div><div><img src="siteStyle/images/cart.svg" class="svg" alt=""><div>+</div></div></div>'+
+									'<div class="ml-auto text-right">' +
+										'<div class="rating_r rating_r_4 home_item_rating">'+'<i></i><i></i><i></i><i></i><i></i>'+product.rating+'</div>'+
+										'<div class="product_price text-right">'+'$'+parseInt(product.price)+'<span>'+(((parseFloat(product.price)%1).toFixed(2)).toString()).replace("0","")+'</span></div>'+
+									'</div>'+
+								'</div>'+
+								'<div class="product_buttons">'+
+									'<div class="text-right d-flex flex-row align-items-start justify-content-start">'+
+										'<div class="product_button product_fav text-center d-flex flex-column align-items-center justify-content-center">'+
+											'<div><div><img src="siteStyle/images/heart_2.svg" class="svg" alt=""><div>+</div></div></div>'+
+										'</div>'+
+										'<div class="product_button product_cart text-center d-flex flex-column align-items-center justify-content-center">'+
+											'<div><div><img src="siteStyle/images/cart.svg" class="svg" alt=""><div>+</div></div></div>'+
+										'</div>'+
 									'</div>'+
 								'</div>'+
 							'</div>'+
 						'</div>'+
-					'</div>'+
-				'</div>' ;
-				bootstrap_container.innerHTML=product;
-				product_container.appendChild(bootstrap_container);
+					'</div>' ;
+					bootstrap_container.innerHTML=product;
+					product_container.appendChild(bootstrap_container);
+				}
 			}
 
 		},

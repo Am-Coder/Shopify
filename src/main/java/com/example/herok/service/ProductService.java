@@ -3,9 +3,10 @@ package com.example.herok.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import com.example.herok.enities.Product;
+import com.example.herok.nonentity.ProductDisplay;
 import com.example.herok.repositories.ProductRepo;
 
 @Service
@@ -15,20 +16,20 @@ public class ProductService {
 	ProductRepo productRepo;
 	
 	
-	public List<Product> fetchClothes(){
+	public List<ProductDisplay> fetchClothes(int page){
 		
-		return productRepo.findByType("clothing");
+		return productRepo.findByType("clothing",PageRequest.of(page, 10));
 		
 	}
 	
-	public List<Product> fetchElectronics(){
+	public List<ProductDisplay> fetchElectronics(int page){
 		
-		return productRepo.findByType("electronics");
+		return productRepo.findByType("electronics",PageRequest.of(page, 10));
 	}
 	
-	public List<Product> fetchFootwear(){
+	public List<ProductDisplay> fetchFootwear(int page){
 		
-		return productRepo.findByType("footwear");
+		return productRepo.findByType("footwear",PageRequest.of(page, 10));
 	}
 	
 }
