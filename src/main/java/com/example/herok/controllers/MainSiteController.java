@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.herok.AjaxMsg.AjaxPidMessage;
 import com.example.herok.AjaxMsg.AjaxQuantityMessage;
+import com.example.herok.enities.Product;
 import com.example.herok.nonentity.CartDisplay;
 import com.example.herok.nonentity.ProductDisplay;
 import com.example.herok.repositories.CartRepo;
@@ -52,16 +53,16 @@ public class MainSiteController {
 	public List<ProductDisplay> fetchProduct(@PathVariable("type") String type,@PathVariable("page") int page) throws JsonProcessingException {
 		System.out.println(type + "----" + page);
 		if(type.equals("Clothing")){
-			System.out.println("clthes--"+prodService.fetchClothes(page));
-			return prodService.fetchClothes(page);
+//			System.out.println("clthes--"+prodService.fetchClothes(page,1));
+			return prodService.fetchClothes(page,1);
 		}
 		else if (type.equals("Footwear")) {
-			System.out.println("footew--"+prodService.fetchFootwear(page));
-			return prodService.fetchFootwear(page);
+//			System.out.println("footew--"+prodService.fetchFootwear(page,1));
+			return prodService.fetchFootwear(page,1);
 		}
 		else if (type.equals("Electronics")) {
-			System.out.println("electronics--"+prodService.fetchElectronics(page));
-			return prodService.fetchElectronics(page);
+//			System.out.println("electronics--"+prodService.fetchElectronics(page,1));
+			return prodService.fetchElectronics(page,1);
 		}
 		
 		return null;
@@ -126,5 +127,24 @@ public class MainSiteController {
 	public void addItemToCart(@RequestBody AjaxPidMessage msg) {
 		System.out.println("Adding---" + msg.getPid());
 		cartService.addToCart(msg.getPid(), "abc@abc.com");
+	}
+	
+	@ResponseBody
+	@PostMapping("/fetchCarousel/{type}")
+	public List<ProductDisplay> fetchCarousel(@PathVariable String type) {
+		if(type.equals("Electronics")) {
+			return prodService.fetchElectronics(0,3);
+			
+			
+		}else if (type.equals("Clothing")) {
+			return prodService.fetchClothes(0,3);
+
+			
+		}else if(type.equals("Footwear")) {
+			return prodService.fetchFootwear(0,3);
+
+			
+		}
+		return null;
 	}
 }

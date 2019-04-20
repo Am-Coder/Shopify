@@ -16,20 +16,20 @@ public class ProductService {
 	ProductRepo productRepo;
 	
 	
-	public List<ProductDisplay> fetchClothes(int page){
+	public List<ProductDisplay> fetchClothes(int page,int size){
 		
-		return productRepo.findByType("clothing",PageRequest.of(page, 10));
+		return productRepo.findByType("clothing",PageRequest.of(page, size));
 		
 	}
 	
-	public List<ProductDisplay> fetchElectronics(int page){
+	public List<ProductDisplay> fetchElectronics(int page,int size){
 		
-		return productRepo.findByType("electronics",PageRequest.of(page, 1));
+		return productRepo.findByType("electronics",PageRequest.of(page, size));
 	}
 	
-	public List<ProductDisplay> fetchFootwear(int page){
+	public List<ProductDisplay> fetchFootwear(int page,int size){
 		
-		return productRepo.findByType("footwear",PageRequest.of(page, 10));
+		return productRepo.findByType("footwear",PageRequest.of(page, size));
 	}
 	
 }
