@@ -6,17 +6,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 //import org.springframework.transaction.annotation.Transactional;
 
-import com.example.herok.AjaxMsg.AjaxPidMessage;
 import com.example.herok.AjaxMsg.AjaxQuantityMessage;
 import com.example.herok.enities.Cart;
 import com.example.herok.nonentity.CartDisplay;
 import com.example.herok.repositories.CartRepo;
+import com.example.herok.repositories.ProductRepo;
+import com.example.herok.repositories.UserRepo;
 
 @Service
 public class CartService {
 	
 	@Autowired
 	private CartRepo cartRepo;
+	
+	@Autowired
+	private ProductRepo prodRepo;
+	
+	@Autowired
+	private UserRepo userRepo;
 	
 //	@Transactional
 	public List<CartDisplay> fetchCart(String email) {
@@ -42,5 +49,19 @@ public class CartService {
 		if(msg.getQuantity()!=0)
 			cartRepo.updateQuantity(msg.getPid(),msg.getQuantity(),email);
 
+	}
+	
+	public void addToCart(String pid,String email) {
+		System.out.println(userRepo.findByEmail(email));
+		System.out.println(prodRepo.findById(pid).get());
+
+		Cart cart = new Cart();
+//		if(prodRepo.findById(pid).g)
+		cart.setPid(prodRepo.findById(pid).get());;
+		cart.setUserEmail(userRepo.findByEmail(email).get());
+		if(cartRepo.findByUserEmailAndPid(email, pid) == null) {
+			System.out.println("Inside addToCart");
+			cartRepo.save(cart);
+		}
 	}
 }

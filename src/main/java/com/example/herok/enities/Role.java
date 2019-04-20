@@ -13,7 +13,7 @@ import javax.persistence.ManyToMany;
 public class Role {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private Long id;
 	
 	@ManyToMany(mappedBy="role")
 	private Set<User> users;

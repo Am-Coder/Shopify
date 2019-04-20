@@ -47,22 +47,23 @@ public class MainSiteController {
 
 	
 					
-	@GetMapping("/fetch/{type}")
+	@GetMapping("/fetch/{type}/{page}")
 	@ResponseBody	
-	public List<ProductDisplay> fetchProduct(@PathVariable("type") String type) throws JsonProcessingException {
+	public List<ProductDisplay> fetchProduct(@PathVariable("type") String type,@PathVariable("page") int page) throws JsonProcessingException {
+		System.out.println(type + "----" + page);
 		if(type.equals("Clothing")){
-			System.out.println("clthes--"+prodService.fetchClothes(0));
-			return prodService.fetchClothes(0);
+			System.out.println("clthes--"+prodService.fetchClothes(page));
+			return prodService.fetchClothes(page);
 		}
 		else if (type.equals("Footwear")) {
-			System.out.println("footew--"+prodService.fetchFootwear(0));
-			return prodService.fetchFootwear(0);
+			System.out.println("footew--"+prodService.fetchFootwear(page));
+			return prodService.fetchFootwear(page);
 		}
 		else if (type.equals("Electronics")) {
-			System.out.println("electronics--"+prodService.fetchElectronics(0));
-			return prodService.fetchElectronics(0);
+			System.out.println("electronics--"+prodService.fetchElectronics(page));
+			return prodService.fetchElectronics(page);
 		}
-		System.out.println("done" + type);
+		
 		return null;
 	}				
 					
@@ -118,5 +119,12 @@ public class MainSiteController {
 		System.out.println(msg.getPid()+"----"+msg.getQuantity());
 		cartService.updateQuantity(msg,"abc@abc.com");
 		
+	}
+	
+	@ResponseBody
+	@PostMapping("/addToCart")
+	public void addItemToCart(@RequestBody AjaxPidMessage msg) {
+		System.out.println("Adding---" + msg.getPid());
+		cartService.addToCart(msg.getPid(), "abc@abc.com");
 	}
 }

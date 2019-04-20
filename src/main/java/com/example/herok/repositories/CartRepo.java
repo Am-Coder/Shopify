@@ -11,16 +11,14 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.example.herok.enities.Cart;
-import com.example.herok.enities.Product;
-import com.example.herok.enities.User;
 import com.example.herok.nonentity.CartDisplay;
 
 @Repository
 //@RepositoryRestResource(excerptProjection = CartDisplay.class)
 public interface CartRepo extends JpaRepository<Cart, Long> {
 	
-//	@Query("Select c.quantity,p.productname,p.price,p.availability from Cart c INNER JOIN Product p on p.pid=c.pid where c.userEmail.email = :userEmail")
-//	public List<CartDisplay> findByUserEmail(@Param("userEmail") String userEmail);
+	@Query("Select c from Cart c where c.userEmail.email = :userEmail and c.pid.pid = :pid")
+	public Cart findByUserEmailAndPid(@Param("userEmail") String userEmail,@Param("pid") String pid);
 	
 	@Query("Select new com.example.herok.nonentity.CartDisplay(p.pid,c.quantity,p.productname,i.directory,p.price,p.availability) from Cart c INNER JOIN Product p on p.pid=c.pid.pid INNER JOIN Images i on c.pid.pid=i.pid where c.userEmail.email = :userEmail")
 	public List<CartDisplay> findByUserEmail(@Param("userEmail") String userEmail);
@@ -42,5 +40,6 @@ public interface CartRepo extends JpaRepository<Cart, Long> {
 	@Query("Update Cart c set c.quantity= :quantity where c.userEmail.email = :email and c.pid.pid = :pid")
 	public void updateQuantity(@Param("pid") String pid, @Param("quantity") int quantity, @Param("email") String email);
 	
-//	public void deleteByUserEmailAndPid(User userEmail,Product pid);
+	
+
 }

@@ -4,6 +4,16 @@ import javax.persistence.Column;
 
 public class ProductDisplay {
 	
+	private String pid;
+	
+	public String getPid() {
+		return pid;
+	}
+
+	public void setPid(String pid) {
+		this.pid = pid;
+	}
+
 	private String productname;
 	
 	private String type;
@@ -12,17 +22,10 @@ public class ProductDisplay {
 	
 	private Float rating;
 	
-	private String availability;
-	
-	private String brand;
-	
-	private String directory;
-
-	
-	
-	public ProductDisplay(String productname, String type, Float price, Float rating, String availability, String brand,
-			String directory) {
+	public ProductDisplay(String pid, String productname, String type, Float price, Float rating, String availability,
+			String brand, String directory) {
 		super();
+		this.pid = pid;
 		this.productname = productname;
 		this.type = type;
 		this.price = price;
@@ -31,6 +34,16 @@ public class ProductDisplay {
 		this.brand = brand;
 		this.directory = directory;
 	}
+
+	private String availability;
+	
+	private String brand;
+	
+	private String directory;
+
+	
+	
+
 
 	public String getProductname() {
 		return productname;

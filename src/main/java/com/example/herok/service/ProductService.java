@@ -24,7 +24,7 @@ public class ProductService {
 	
 	public List<ProductDisplay> fetchElectronics(int page){
 		
-		return productRepo.findByType("electronics",PageRequest.of(page, 10));
+		return productRepo.findByType("electronics",PageRequest.of(page, 1));
 	}
 	
 	public List<ProductDisplay> fetchFootwear(int page){

@@ -2,7 +2,7 @@ package com.example.herok.enities;
 
 import org.springframework.stereotype.Component;
 
-@Component
+//@Component
 public class Email {
 	private String email;
 

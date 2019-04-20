@@ -22,7 +22,7 @@ public interface ProductRepo extends JpaRepository<Product,String> {
 	Optional<Product> findByPrice(String price);
 	
 	
-	@Query("select new com.example.herok.nonentity.ProductDisplay(p.productname,p.type,p.price,p.rating,p.availability,p.brand,i.directory) from Product p INNER JOIN Images i on i.pid.pid = p.pid where p.type = :type")
+	@Query("select new com.example.herok.nonentity.ProductDisplay(p.pid,p.productname,p.type,p.price,p.rating,p.availability,p.brand,i.directory) from Product p INNER JOIN Images i on i.pid.pid = p.pid where p.type = :type")
 	List<ProductDisplay> findByType(@Param("type") String type,Pageable pageable);
 	
 //	@Query("")

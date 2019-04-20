@@ -104,14 +104,59 @@
 //////////////////////////////////////////////////////////////////////////M2
 
 window.addEventListener('load',function mainpage_load(){
+	
+	var electronicsPage=0;
+	var footwearPage=0;
+	var clothingPage=0;
+
+	getClothing(0);
+	
+	
+	getElectronics(0);
+	
+	
+	getFootwear(0);
+	
+	
+	var load_more_electronic = document.getElementsByClassName("load_more_electronics")[0];
+	load_more_electronic.addEventListener("click",function loadNextPage(){
+		electronicsPage+=1;
+		getElectronics(electronicsPage);
+		if(electronicsPage>=4)
+			electronicsPage=-1;
+
+	});
+	
+	
+	var load_more_footwear = document.getElementsByClassName("load_more_footwear")[0];
+	load_more_footwear.addEventListener("click",function loadNextPage(){
+		footwearPage+=1;
+		getFootwear(footwearPage);
+		if(footwearPage>=4)
+			footwearPage=-1;		
+
+	});
+	
+	
+	var load_more_clothing = document.getElementsByClassName("load_more_clothing")[0];
+	load_more_clothing.addEventListener("click",function loadNextPage(){
+		clothingPage+=1;
+		getClothing(clothingPage);
+		if(clothingPage>=4)
+			clothingPage=-1;		
+
+	});
+	
+})
 
 
+function getClothing(page){
 	//Ajax for fetching clothes
 	$.ajax({
 		type : "GET",
 		cache: false,
 		// contentType : "application/json",//type of data being send to server
-		url : "/mainsite/fetch/Clothing",
+		url : "/mainsite/fetch/Clothing/"+page,
 		// data : JSON.stringify({email: $("#email").val()}),
 		
 		dataType : "json",//result expected from server
@@ -124,7 +169,11 @@ window.addEventListener('load',function mainpage_load(){
 			if(productList.length != 0){
 				
 					var product_container = document.getElementsByClassName("row products_row")[0];
-		
+					
+					for(i=0; i<product_container.childElementCount-1; i++){
+						product_container.removeChild(product_container.children[i]);
+					}
+					
 					for(i=0;i<productList.length;i++){
 						var product = productList[i];
 
@@ -133,7 +182,7 @@ window.addEventListener('load',function mainpage_load(){
 						
 						
 						var product ='<div class="product">'+
-							'<div class="product_image"><img src='+ product.directory +' alt=""></div>' +
+							'<div class="product_image"><img src='+ product.directory+ "product.jpg" +' alt=""></div>' +
 							'<div class="product_content">' +
 								'<div class="product_info d-flex flex-row align-items-start justify-content-start">' +
 									'<div>' + 
@@ -143,12 +192,12 @@ window.addEventListener('load',function mainpage_load(){
 										'</div>' +
 									'</div>'+
 									'<div class="ml-auto text-right">' +
-										'<div class="rating_r rating_r_4 home_item_rating">'+'<i></i><i></i><i></i><i></i><i></i>'+product.rating+'</div>'+
+										'<div class="rating_r rating_r_'+parseInt(product.rating)+' home_item_rating">'+'<i></i><i></i><i></i><i></i><i></i>'+product.rating+'</div>'+
 										'<div class="product_price text-right">'+'$'+parseInt(product.price)+'<span>'+(((parseFloat(product.price)%1).toFixed(2)).toString()).replace("0","")+'</span></div>'+
 									'</div>'+
 								'</div>'+
 								'<div class="product_buttons">'+
-									'<div class="text-right d-flex flex-row align-items-start justify-content-start">'+
+									'<div class="text-right d-flex flex-row align-items-start justify-content-start" id="'+product.pid+'">'+
 										'<div class="product_button product_fav text-center d-flex flex-column align-items-center justify-content-center">'+
 											'<div><div><img src="siteStyle/images/heart_2.svg" class="svg" alt=""><div>+</div></div></div>'+
 										'</div>'+
@@ -161,10 +210,18 @@ window.addEventListener('load',function mainpage_load(){
 						'</div>'+
 					'</div>' ;
 					bootstrap_container.innerHTML=product;
-					product_container.appendChild(bootstrap_container);
-						
+					product_container.insertBefore(bootstrap_container,product_container.childNodes[0]);
+
+
 				}
-					
+//					var loadMore = document.createElement("div");
+//					loadMore.setAttribute("class","row load_more_row")
+//					var end =	'<div class="col">'+
+//									'<div class="button load_more_clothing ml-auto mr-auto"><a href="#">load more</a></div>'+
+//								'</div>';
+//					loadMore.innerHTML = end;
+//					product_container.appendChild(loadMore);	
+
 			}
 
 		},
@@ -172,17 +229,43 @@ window.addEventListener('load',function mainpage_load(){
 			console.log("ERROR: ", e);
 		},
 		complete : function(e) {
-			console.log("DONE");
+			var addToCartBut = document.getElementsByClassName("product_button product_cart");
+//			console.log(addToCartBut);
+			for(i=0; i<addToCartBut.length; i++){
+				
+				addToCartBut[i].addEventListener("click", function addInCart(e){
+					
+					console.log(e.target.parentNode.id);
+					$.ajax({
+						type:"POST",
+						url:"/mainsite/addToCart",
+        				contentType:"application/json",
+        				cache:"false",
+        				data:JSON.stringify({pid:e.target.parentNode.id}),//Send pid of item to be removed
+        				timeout:100000,
+						success:function(){
+							alert("Item Added To Cat");
+						},
+						error:function(e){
+							console.log(e);
+						},
+					})
+					
+				})
+				
+			}
 		}
 	});
-	
-	
+}
+
+
+function getElectronics(page){
 	//Ajax for fetching electronics
 	$.ajax({
 		type : "GET",
 		cache: false,
 		// contentType : "application/json",//type of data being send to server
-		url : "/mainsite/fetch/Electronics",
+		url : "/mainsite/fetch/Electronics/"+page,
 		// data : JSON.stringify({email: $("#email").val()}),
 		
 		dataType : "json",//result expected from server
@@ -194,7 +277,12 @@ window.addEventListener('load',function mainpage_load(){
 			console.log(productList);
 			if(productList.length != 0){
 				var product_container = document.getElementsByClassName("row products_row")[1];
-
+				
+		
+				for(i=0; i<product_container.childElementCount-1; i++){
+					product_container.removeChild(product_container.children[i]);
+				}
+				
 				for(i=0; i<productList.length; i++){
 					
 						var product = productList[i];
@@ -204,7 +292,7 @@ window.addEventListener('load',function mainpage_load(){
 						
 						
 						var product ='<div class="product">'+
-							'<div class="product_image"><img src='+ product.directory +' alt=""></div>' +
+							'<div class="product_image"><img src='+ product.directory+ "product.jpg" +' alt=""></div>' +
 							'<div class="product_content">' +
 								'<div class="product_info d-flex flex-row align-items-start justify-content-start">' +
 									'<div>' + 
@@ -214,12 +302,12 @@ window.addEventListener('load',function mainpage_load(){
 										'</div>' +
 									'</div>'+
 									'<div class="ml-auto text-right">' +
-										'<div class="rating_r rating_r_4 home_item_rating">'+'<i></i><i></i><i></i><i></i><i></i>'+product.rating+'</div>'+
+										'<div class="rating_r rating_r_'+parseInt(product.rating)+' home_item_rating">'+'<i></i><i></i><i></i><i></i><i></i>'+product.rating+'</div>'+
 										'<div class="product_price text-right">'+'$'+parseInt(product.price)+'<span>'+(((parseFloat(product.price)%1).toFixed(2)).toString()).replace("0","")+'</span></div>'+
 									'</div>'+
 								'</div>'+
 								'<div class="product_buttons">'+
-									'<div class="text-right d-flex flex-row align-items-start justify-content-start">'+
+									'<div class="text-right d-flex flex-row align-items-start justify-content-start" id="'+product.pid+'">'+
 										'<div class="product_button product_fav text-center d-flex flex-column align-items-center justify-content-center">'+
 											'<div><div><img src="siteStyle/images/heart_2.svg" class="svg" alt=""><div>+</div></div></div>'+
 										'</div>'+
@@ -232,11 +320,16 @@ window.addEventListener('load',function mainpage_load(){
 						'</div>'+
 					'</div>' ;
 					bootstrap_container.innerHTML=product;
-					product_container.appendChild(bootstrap_container);
-					
-					
+					product_container.insertBefore(bootstrap_container,product_container.childNodes[0]);
+
 				}
-					
+//				var loadMore = document.createElement("div");
+//				loadMore.setAttribute("class","row load_more_row")
+//				var end =	'<div class="col">'+
+//								'<div class="button load_more_electronics ml-auto mr-auto"><a href="#">load more</a></div>'+
+//							'</div>';
+//				loadMore.innerHTML = end;
+//				product_container.appendChild(loadMore);			
 			}
 
 		},
@@ -244,17 +337,45 @@ window.addEventListener('load',function mainpage_load(){
 			console.log("ERROR: ", e);
 		},
 		complete : function(e) {
-			console.log("DONE");
+			var addToCartBut = document.getElementsByClassName("product_button product_cart");
+//			console.log(addToCartBut);
+			for(i=0; i<addToCartBut.length; i++){
+				
+				addToCartBut[i].addEventListener("click", function addInCart(e){
+					
+					console.log(e.target.parentNode.id);
+					$.ajax({
+						type:"POST",
+						url:"/mainsite/addToCart",
+        				contentType:"application/json",
+        				cache:"false",
+        				data:JSON.stringify({pid:e.target.parentNode.id}),//Send pid of item to be removed
+        				timeout:100000,
+						success:function(){
+							alert("Item Added To Cat");
+						},
+						error:function(e){
+							console.log(e);
+						},
+					})
+					
+				})
+				
+			}
+			
+
+			
 		}
 	});
-	
-	
+}
+
+function getFootwear(page){
 	//Ajax for fetching footwear
 	$.ajax({
 		type : "GET",
 		cache: false,
 		// contentType : "application/json",//type of data being send to server
-		url : "/mainsite/fetch/Footwear",
+		url : "/mainsite/fetch/Footwear/"+page,
 		// data : JSON.stringify({email: $("#email").val()}),
 		
 		dataType : "json",//result expected from server
@@ -267,6 +388,10 @@ window.addEventListener('load',function mainpage_load(){
 			if(productList.length != 0){
 				var product_container = document.getElementsByClassName("row products_row")[2];
 
+				for(i=0; i<product_container.childElementCount-1; i++){
+					product_container.removeChild(product_container.children[i]);
+				}
+								
 				for(i=0; i<productList.length; i++){
 						var product = productList[i];
 					
@@ -276,7 +401,7 @@ window.addEventListener('load',function mainpage_load(){
 						
 						
 						var product ='<div class="product">'+
-							'<div class="product_image"><img src='+ product.directory +' alt=""></div>' +
+							'<div class="product_image"><img src='+ product.directory+ "product.jpg" +' alt=""></div>' +
 							'<div class="product_content">' +
 								'<div class="product_info d-flex flex-row align-items-start justify-content-start">' +
 									'<div>' + 
@@ -286,12 +411,12 @@ window.addEventListener('load',function mainpage_load(){
 										'</div>' +
 									'</div>'+
 									'<div class="ml-auto text-right">' +
-										'<div class="rating_r rating_r_4 home_item_rating">'+'<i></i><i></i><i></i><i></i><i></i>'+product.rating+'</div>'+
+										'<div class="rating_r rating_r_'+parseInt(product.rating)+' home_item_rating">'+'<i></i><i></i><i></i><i></i><i></i>'+product.rating+'</div>'+
 										'<div class="product_price text-right">'+'$'+parseInt(product.price)+'<span>'+(((parseFloat(product.price)%1).toFixed(2)).toString()).replace("0","")+'</span></div>'+
 									'</div>'+
 								'</div>'+
 								'<div class="product_buttons">'+
-									'<div class="text-right d-flex flex-row align-items-start justify-content-start">'+
+									'<div class="text-right d-flex flex-row align-items-start justify-content-start" id="'+product.pid+'">'+
 										'<div class="product_button product_fav text-center d-flex flex-column align-items-center justify-content-center">'+
 											'<div><div><img src="siteStyle/images/heart_2.svg" class="svg" alt=""><div>+</div></div></div>'+
 										'</div>'+
@@ -303,18 +428,49 @@ window.addEventListener('load',function mainpage_load(){
 							'</div>'+
 						'</div>'+
 					'</div>' ;
+						 
 					bootstrap_container.innerHTML=product;
-					product_container.appendChild(bootstrap_container);
+					product_container.insertBefore(bootstrap_container,product_container.childNodes[0]);
 				}
+//				var loadMore = document.createElement("div");
+//				loadMore.setAttribute("class","row load_more_row")
+//				var end =	'<div class="col">'+
+//								'<div class="button load_more_footwear ml-auto mr-auto"><a href="#">load more</a></div>'+
+//							'</div>';
+//				loadMore.innerHTML = end;
+//				product_container.appendChild(loadMore);	
 			}
 
 		},
 		error : function(e) {
 			console.log("ERROR: ", e);
 		},
-		complete : function(e) {
-			console.log("DONE");
+		complete : function() {
+			var addToCartBut = document.getElementsByClassName("product_button product_cart");
+//			console.log(addToCartBut);
+			for(i=0; i<addToCartBut.length; i++){
+				
+				addToCartBut[i].addEventListener("click", function addInCart(e){
+					
+					console.log(e.target.parentNode.id);
+					$.ajax({
+						type:"POST",
+						url:"/mainsite/addToCart",
+        				contentType:"application/json",
+        				cache:"false",
+        				data:JSON.stringify({pid:e.target.parentNode.id}),//Send pid of item to be removed
+        				timeout:100000,
+						success:function(){
+							alert("Item Added To Cat");
+						},
+						error:function(e){
+							console.log(e);
+						},
+					})
+					
+				})
+				
+			}
 		}
 	});
-  
-})
+}

@@ -54,7 +54,7 @@ function CartRefresh(){
                     
                   var item =    '<div class="product d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-start mr-auto">'+
                                 '<div><div class="product_number">'+(i+1)+'</div></div>'+
-                                '<div><div class="product_image"><img src='+cart.src +' alt=""></div></div>'+
+                                '<div><div class="product_image"><img src='+cart.src+"cart.jpg" +' alt=""></div></div>'+
                                 '<div class="product_name_container">'+
                                     '<div class="product_name"><a href='+"product.html"+'>'+cart.productname+'</a></div>'+
                                     '<div class="product_text">'+cart.availability+'</div>'+
