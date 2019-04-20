@@ -192,7 +192,7 @@ function getClothing(page){
 										'</div>' +
 									'</div>'+
 									'<div class="ml-auto text-right">' +
-										'<div class="rating_r rating_r_'+parseInt(product.rating)+' home_item_rating">'+'<i></i><i></i><i></i><i></i><i></i>'+product.rating+'</div>'+
+										'<div class="rating_r rating_r_'+Math.round(product.rating)+' home_item_rating">'+'<i></i><i></i><i></i><i></i><i></i>'+product.rating+'</div>'+
 										'<div class="product_price text-right">'+'$'+parseInt(product.price)+'<span>'+(((parseFloat(product.price)%1).toFixed(2)).toString()).replace("0","")+'</span></div>'+
 									'</div>'+
 								'</div>'+
@@ -302,7 +302,7 @@ function getElectronics(page){
 										'</div>' +
 									'</div>'+
 									'<div class="ml-auto text-right">' +
-										'<div class="rating_r rating_r_'+parseInt(product.rating)+' home_item_rating">'+'<i></i><i></i><i></i><i></i><i></i>'+product.rating+'</div>'+
+										'<div class="rating_r rating_r_'+Math.round(product.rating)+' home_item_rating">'+'<i></i><i></i><i></i><i></i><i></i>'+product.rating+'</div>'+
 										'<div class="product_price text-right">'+'$'+parseInt(product.price)+'<span>'+(((parseFloat(product.price)%1).toFixed(2)).toString()).replace("0","")+'</span></div>'+
 									'</div>'+
 								'</div>'+
@@ -411,7 +411,7 @@ function getFootwear(page){
 										'</div>' +
 									'</div>'+
 									'<div class="ml-auto text-right">' +
-										'<div class="rating_r rating_r_'+parseInt(product.rating)+' home_item_rating">'+'<i></i><i></i><i></i><i></i><i></i>'+product.rating+'</div>'+
+										'<div class="rating_r rating_r_'+Math.round(product.rating)+' home_item_rating">'+'<i></i><i></i><i></i><i></i><i></i>'+product.rating+'</div>'+
 										'<div class="product_price text-right">'+'$'+parseInt(product.price)+'<span>'+(((parseFloat(product.price)%1).toFixed(2)).toString()).replace("0","")+'</span></div>'+
 									'</div>'+
 								'</div>'+
