@@ -86,7 +86,7 @@ public class AppConfig extends WebSecurityConfigurerAdapter{
 			//Custom Login
 			.formLogin()
 				.loginPage("/SignIn").permitAll()
-				.defaultSuccessUrl("/mainsite")
+				.defaultSuccessUrl("/mainsite/home")
 			.and()
 			
 			//Remeber Me Cookie (By default validity is 2 weeks)
