@@ -9,7 +9,7 @@ This is the project I worked to understand how spring boot functions. It is an o
 - DAO Architecture
 
 ## Some Screenshots
-![alt text](https://github.com/Am-Coder/Shopify/blob/master/Screenshots/1.png "Home Page")
+![alt text](https://github.com/Am-Coder/Shopify/blob/master/screenshots/1.png "Home Page")
 
 ![alt text](https://github.com/Am-Coder/Shopify/blob/master/screenshots/2.png "Product Page")
 
